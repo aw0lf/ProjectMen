@@ -30,9 +30,17 @@ cd /backend/mysite
  ```
  npm start
  ```
- Aplikacja dostępna pod
+ 
+ 
+Aplikacja dostępna pod
  http://localhost:3000
- Admin
+Admin
  http://127.0.0.1:8000/admin/
  
- Enjoy!
+superuser: login: super@a.com
+password: 123
+
+
+
+
+Enjoy!
