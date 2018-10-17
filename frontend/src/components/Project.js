@@ -47,7 +47,7 @@ render () {
         }>
             <Row>
                 <Col xs={12}>
-                    <p>author: kierownik</p>
+                    <p>author: {this.props.owner}</p>
                     <p>status: {this.props.status}</p>
                 </Col>
                 <Col xs={12} >

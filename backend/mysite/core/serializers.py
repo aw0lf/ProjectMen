@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CustomUser
-        fields = ('id','email', 'password', 'first_name','last_name','date_of_birth','gender','role' )
+        fields = ('id','email', 'password', 'first_name','last_name','date_of_birth','gender','role','owner' )
 
 
 
@@ -16,10 +16,8 @@ class CurrentUserView(APIView):
 
 class ActivitySerializer(serializers.ModelSerializer):
 
-    # Create a custom method field
     current_user = serializers.SerializerMethodField('_user')
 
-    # Use this method for the custom field
     def _user(self, obj):
         request = getattr(self.context, 'request', None)
         if request:
@@ -27,11 +25,12 @@ class ActivitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model =models.CustomUser
-        # Add our custom method to the fields of the serializer
         fields = ('id','current_user')
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Project
-        fields=('id','title','description', 'start_date', 'end_date', 'status')
+        owner = PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
+
+        fields=('id','title','description', 'start_date', 'end_date', 'status','owner_id',owner)
